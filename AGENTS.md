@@ -3,6 +3,7 @@
 Use this file when an agent is asked to configure Hermes Desktop on a Mac for DGX Spark local inference.
 
 Do not guess model ids. Read them from `/v1/models`.
+Do not broaden scope beyond Hermes Desktop on macOS and a DGX Spark OpenAI-compatible endpoint.
 
 ## Inputs
 
@@ -43,6 +44,8 @@ local
    ```
 
 4. Update `~/.hermes/config.yaml`:
+
+   Preserve unrelated Hermes settings. Edit only the top-level `model` block and `providers.dgx-spark`.
 
    ```yaml
    model:

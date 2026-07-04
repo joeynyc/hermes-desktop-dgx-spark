@@ -1,12 +1,12 @@
 model:
   provider: custom:dgx-spark
-  base_url: http://100.70.19.106:8000/v1
+  base_url: http://SPARK_IP:8000/v1
   default: MODEL_ID
 
 providers:
   dgx-spark:
     name: DGX Spark
-    api: http://100.70.19.106:8000/v1
+    api: http://SPARK_IP:8000/v1
     key_env: OPENAI_API_KEY
     default_model: MODEL_ID
     transport: openai_chat

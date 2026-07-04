@@ -9,10 +9,14 @@ if [[ -z "$base_url" || -z "$model_id" ]]; then
   exit 2
 fi
 
-echo "Checking models at $base_url/models"
-curl -fsS "$base_url/models" | tee /tmp/hermes-dgx-spark-models.json >/dev/null
+base_url="${base_url%/}"
+models_file="$(mktemp "${TMPDIR:-/tmp}/hermes-dgx-spark-models.XXXXXX.json")"
+trap 'rm -f "$models_file"' EXIT
 
-if ! grep -q "\"id\"[[:space:]]*:[[:space:]]*\"$model_id\"" /tmp/hermes-dgx-spark-models.json; then
+echo "Checking models at $base_url/models"
+curl -fsS "$base_url/models" | tee "$models_file" >/dev/null
+
+if ! tr -d '[:space:]' < "$models_file" | grep -Fq "\"id\":\"$model_id\""; then
   echo "Model id not found: $model_id" >&2
   exit 1
 fi

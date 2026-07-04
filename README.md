@@ -2,6 +2,8 @@
 
 Connect Hermes Agent Desktop on macOS to an OpenAI-compatible inference server running on a DGX Spark.
 
+This is an unofficial field guide. It is intentionally narrow: Mac, Hermes Desktop, DGX Spark, OpenAI-compatible `/v1` API.
+
 This guide is for this setup:
 
 ```text
@@ -16,6 +18,15 @@ http://<spark-ip>:8000/v1
 Hermes Desktop uses the same Hermes config and API keys as the CLI/TUI. That means the Desktop UI and `~/.hermes/config.yaml` are both valid ways to configure the same agent.
 
 Official reference: https://hermes-agent.nousresearch.com/docs/user-guide/desktop
+
+## Requirements
+
+```text
+Mac with Hermes Agent Desktop installed
+DGX Spark running an OpenAI-compatible server
+Network path from Mac to Spark over Tailscale or LAN
+One model id from /v1/models
+```
 
 ## Humans vs Agents
 
@@ -109,6 +120,8 @@ Edit:
 ```text
 ~/.hermes/config.yaml
 ```
+
+Do not replace the whole file. Preserve existing Hermes settings and update only `model` plus `providers.dgx-spark`.
 
 Add or update this block:
 
